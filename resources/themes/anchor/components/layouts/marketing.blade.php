@@ -12,6 +12,7 @@
     </main>
 
     @livewire('notifications')
+    <x-marketing.sections.footer-banner />
     @include('theme::partials.footer')
     @include('theme::partials.footer-scripts')
     {{ $javascript ?? '' }}
