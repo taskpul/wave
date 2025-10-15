@@ -21,7 +21,11 @@
         <x-container class="py-12 border-t sm:py-24 border-zinc-200">
             <x-marketing.sections.testimonials />
         </x-container>
-        
+
+        <x-container class="py-12 border-t sm:py-24 border-zinc-200">
+            <x-marketing.sections.integrations />
+        </x-container>
+
         <x-container class="py-12 border-t sm:py-24 border-zinc-200">
             <x-marketing.sections.pricing />
         </x-container>
