@@ -1,14 +1,20 @@
-<section class="py-24 sm:py-32">
-    <div class="px-6 mx-auto max-w-6xl lg:px-8">
+<section class="relative py-24 sm:py-32 bg-[#f8f7f6]">
+    <div aria-hidden="true" class="absolute inset-y-0 left-0 right-0 hidden pointer-events-none lg:flex">
+        <div class="mx-auto flex w-full max-w-6xl justify-between px-6 lg:px-8">
+            <span class="h-full w-px bg-zinc-200/60"></span>
+            <span class="h-full w-px bg-zinc-200/60"></span>
+        </div>
+    </div>
+    <div class="relative px-6 mx-auto max-w-6xl lg:px-8">
         <div class="flex flex-col items-center text-center">
-            <span class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-600 shadow-sm">
+            <span class="inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-600 shadow-sm">
                 <x-phosphor-sparkle class="w-4 h-4 text-zinc-500" />
                 For support teams
             </span>
             <h2 class="mt-6 text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl md:text-6xl">
                 How Wave works for customer support teams
             </h2>
-            <p class="mt-6 text-base leading-7 text-zinc-500 sm:text-lg md:max-w-2xl">
+            <p class="mt-6 max-w-2xl text-base leading-7 text-zinc-500 sm:text-lg">
                 Empower your support team with scheduling tools that enhance customer service, streamline issue resolution, and improve satisfaction.
             </p>
             <div class="mt-8">
@@ -17,91 +23,123 @@
                 </x-button>
             </div>
         </div>
-        <div class="grid items-center gap-12 mt-16 lg:grid-cols-[1.05fr,1fr]">
-            <div class="relative isolate overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-zinc-200">
-                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-100">
-                    <div class="flex items-center gap-3">
-                        <span class="inline-flex items-center gap-2 rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
-                            <span class="inline-flex size-1.5 rounded-full bg-emerald-400"></span>
-                            Wave call
-                        </span>
-                        <span class="text-xs font-medium text-zinc-400">Customer sync</span>
+        <div class="grid items-center gap-16 mt-20 lg:grid-cols-[1.1fr,0.9fr]">
+            <div class="relative isolate overflow-hidden rounded-[32px] border border-zinc-200/80 bg-white shadow-xl shadow-zinc-900/5">
+                <div class="flex items-center justify-between px-8 py-6 border-b border-zinc-100">
+                    <div class="flex items-center gap-4">
+                        <div class="flex -space-x-2">
+                            @foreach ([
+                                'https://i.pravatar.cc/120?img=52',
+                                'https://i.pravatar.cc/120?img=15',
+                                'https://i.pravatar.cc/120?img=4'
+                            ] as $avatar)
+                                <img src="{{ $avatar }}" alt="Team member avatar" class="size-9 rounded-full border-2 border-white object-cover">
+                            @endforeach
+                        </div>
+                        <div class="text-left">
+                            <p class="text-sm font-semibold text-zinc-900">Cal.com team huddle meeting</p>
+                            <p class="mt-1 text-xs font-medium text-emerald-500">Live · Support specialists</p>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 text-xs font-medium text-zinc-400">
-                        <span class="inline-flex size-2 rounded-full bg-emerald-400"></span>
-                        Live
+                    <div class="flex items-center gap-3 text-zinc-400">
+                        <span class="inline-flex size-9 items-center justify-center rounded-full border border-zinc-200">
+                            <x-phosphor-bell-ringing-duotone class="w-4 h-4" />
+                        </span>
+                        <span class="inline-flex size-9 items-center justify-center rounded-full border border-zinc-200">
+                            <x-phosphor-faders-duotone class="w-4 h-4" />
+                        </span>
+                        <span class="inline-flex size-9 items-center justify-center rounded-full border border-zinc-200">
+                            <x-phosphor-dots-three-outline class="w-4 h-4" />
+                        </span>
                     </div>
                 </div>
-                <div class="px-6 pb-6">
-                    <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="px-8 pb-8">
+                    <div class="grid grid-cols-2 gap-5 mt-8">
                         @foreach ([
-                            ['name' => 'Jordan P.', 'role' => 'Support Lead', 'img' => 'https://i.pravatar.cc/240?img=47'],
-                            ['name' => 'Serena L.', 'role' => 'Product Specialist', 'img' => 'https://i.pravatar.cc/240?img=32'],
-                            ['name' => 'Daniel W.', 'role' => 'Escalations', 'img' => 'https://i.pravatar.cc/240?img=12'],
-                            ['name' => 'Priya S.', 'role' => 'Customer Success', 'img' => 'https://i.pravatar.cc/240?img=5'],
+                            ['name' => 'Jordan P.', 'title' => 'Support Lead', 'img' => 'https://i.pravatar.cc/320?img=47'],
+                            ['name' => 'Serena L.', 'title' => 'Customer Success', 'img' => 'https://i.pravatar.cc/320?img=32'],
+                            ['name' => 'Daniel W.', 'title' => 'Escalations', 'img' => 'https://i.pravatar.cc/320?img=12'],
+                            ['name' => 'Priya S.', 'title' => 'Product Specialist', 'img' => 'https://i.pravatar.cc/320?img=5'],
                         ] as $participant)
                             <div class="relative overflow-hidden rounded-2xl bg-zinc-900/5 ring-1 ring-zinc-200">
-                                <img src="{{ $participant['img'] }}" alt="{{ $participant['name'] }}" class="object-cover w-full h-32 sm:h-36">
-                                <div class="absolute inset-x-3 bottom-3 rounded-xl bg-white/90 px-3 py-2 backdrop-blur">
+                                <img src="{{ $participant['img'] }}" alt="{{ $participant['name'] }}" class="object-cover w-full h-36">
+                                <div class="absolute inset-x-4 bottom-4 rounded-xl bg-white/90 px-4 py-2 backdrop-blur">
                                     <p class="text-sm font-semibold text-zinc-900">{{ $participant['name'] }}</p>
-                                    <p class="text-xs font-medium text-zinc-500">{{ $participant['role'] }}</p>
+                                    <p class="text-xs font-medium text-zinc-500">{{ $participant['title'] }}</p>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    <div class="flex items-center justify-between px-4 py-4 mt-6 rounded-2xl bg-zinc-50 ring-1 ring-inset ring-zinc-200">
+                    <div class="mt-8 flex items-center justify-between rounded-2xl bg-zinc-900 px-6 py-4 text-white">
                         <div class="flex items-center gap-3">
-                            <div class="flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600 size-10">
-                                <x-phosphor-calendar-check class="w-5 h-5" />
-                            </div>
-                            <div class="text-left">
-                                <p class="text-sm font-semibold text-zinc-900">Upcoming support session</p>
-                                <p class="text-xs font-medium text-zinc-500">Today at 2:30 PM · Zoom</p>
-                            </div>
+                            <button type="button" class="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                                <x-phosphor-microphone class="w-5 h-5" />
+                            </button>
+                            <button type="button" class="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                                <x-phosphor-video-camera class="w-5 h-5" />
+                            </button>
+                            <button type="button" class="inline-flex size-12 items-center justify-center rounded-full bg-rose-500 text-white shadow-lg shadow-rose-500/30 transition hover:bg-rose-400">
+                                <x-phosphor-phone-disconnect class="w-5 h-5" />
+                            </button>
+                            <button type="button" class="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                                <x-phosphor-desktop class="w-5 h-5" />
+                            </button>
+                            <button type="button" class="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                                <x-phosphor-record-circle class="w-5 h-5" />
+                            </button>
                         </div>
-                        <x-button size="sm">
-                            Join now
-                        </x-button>
+                        <div class="flex items-center gap-3 text-sm font-medium">
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1">
+                                <x-phosphor-timer class="w-4 h-4" />
+                                12:42 elapsed
+                            </span>
+                            <span class="inline-flex size-10 items-center justify-center rounded-full bg-white/10">
+                                <x-phosphor-chat-circle-text class="w-5 h-5" />
+                            </span>
+                            <span class="inline-flex size-10 items-center justify-center rounded-full bg-white/10">
+                                <x-phosphor-dots-three-outline-vertical class="w-5 h-5" />
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="lg:pl-8">
-                <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+            <div class="lg:pl-12">
+                <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-600">
                     <x-phosphor-lightning class="w-4 h-4" />
                     Faster support scheduling
                 </div>
                 <h3 class="mt-6 text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-                    Delight customers with instant, personal support
+                    Faster support scheduling
                 </h3>
-                <p class="mt-4 text-base leading-7 text-zinc-500 sm:text-lg">
-                    Let support teams book sessions the moment a request comes in. Wave integrates scheduling with video and phone tools, making it easy to triage, assign, and resolve issues without needless delays.
+                <p class="mt-5 text-base leading-7 text-zinc-500 sm:text-lg">
+                    Let customers book support sessions at their convenience. Wave integrates with video and phone tools, ensuring quick resolutions for issues without unnecessary delays.
                 </p>
-                <dl class="mt-10 space-y-6">
+                <dl class="mt-10 space-y-8">
                     <div class="flex items-start gap-4">
-                        <div class="flex items-center justify-center rounded-full bg-zinc-100 size-12">
-                            <x-phosphor-users-three class="w-6 h-6 text-zinc-600" />
+                        <div class="flex items-center justify-center rounded-full bg-zinc-900/5 text-zinc-600 size-12">
+                            <x-phosphor-users-three class="w-6 h-6" />
                         </div>
                         <div class="text-left">
-                            <dt class="text-base font-semibold text-zinc-900">Collaborative queues</dt>
-                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Prioritize tickets together with shared team visibility and instant handoffs.</dd>
+                            <dt class="text-base font-semibold text-zinc-900">Shared team routing</dt>
+                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Distribute incoming requests to the right specialist with pooled availability and automatic round-robin scheduling.</dd>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="flex items-center justify-center rounded-full bg-zinc-100 size-12">
-                            <x-phosphor-clock-countdown class="w-6 h-6 text-zinc-600" />
+                        <div class="flex items-center justify-center rounded-full bg-zinc-900/5 text-zinc-600 size-12">
+                            <x-phosphor-calendar-check class="w-6 h-6" />
                         </div>
                         <div class="text-left">
-                            <dt class="text-base font-semibold text-zinc-900">Automated availability</dt>
-                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Share real-time booking links that sync across calendars, shifts, and time zones.</dd>
+                            <dt class="text-base font-semibold text-zinc-900">Real-time availability</dt>
+                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Sync every calendar, shift, and time zone so customers always see the latest openings—no manual coordination required.</dd>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="flex items-center justify-center rounded-full bg-zinc-100 size-12">
-                            <x-phosphor-chart-line-up class="w-6 h-6 text-zinc-600" />
+                        <div class="flex items-center justify-center rounded-full bg-zinc-900/5 text-zinc-600 size-12">
+                            <x-phosphor-chart-line-up class="w-6 h-6" />
                         </div>
                         <div class="text-left">
-                            <dt class="text-base font-semibold text-zinc-900">Resolution insights</dt>
-                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Track response times, satisfaction scores, and team performance in one place.</dd>
+                            <dt class="text-base font-semibold text-zinc-900">Resolution analytics</dt>
+                            <dd class="mt-2 text-sm leading-6 text-zinc-500">Track response times, CSAT, and agent performance with dashboards that keep every support leader in sync.</dd>
                         </div>
                     </div>
                 </dl>
