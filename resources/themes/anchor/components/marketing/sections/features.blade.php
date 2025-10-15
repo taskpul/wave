@@ -85,7 +85,11 @@
                                 <x-phosphor-desktop class="w-5 h-5" />
                             </button>
                             <button type="button" class="inline-flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
-                                <x-phosphor-record-circle class="w-5 h-5" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true" class="w-5 h-5">
+                                    <circle cx="128" cy="128" r="48" opacity="0.2" fill="currentColor" />
+                                    <circle cx="128" cy="128" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+                                    <circle cx="128" cy="128" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+                                </svg>
                             </button>
                         </div>
                         <div class="flex items-center gap-3 text-sm font-medium">
