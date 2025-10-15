@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Observers\SubscriptionObserver;
+use App\Observers\UserObserver;
 use Exception;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -10,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Wave\Subscription;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -70,6 +74,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->bootRoute();
+
+        User::observe(UserObserver::class);
+        Subscription::observe(SubscriptionObserver::class);
     }
 
     private function setSchemaDefaultLength(): void

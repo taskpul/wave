@@ -11,7 +11,11 @@
 |
 */
 
+use App\Http\Controllers\CalcomController;
+use Illuminate\Support\Facades\Route;
 use Wave\Facades\Wave;
+
+Route::middleware(['auth'])->get('/access-calcom', CalcomController::class)->name('calcom.access');
 
 // Wave routes
 Wave::routes();
