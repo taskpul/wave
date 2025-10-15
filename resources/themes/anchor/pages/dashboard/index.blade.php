@@ -15,11 +15,35 @@
                 :border="false"
             />
 
+        @php($user = auth()->user())
+
+        @if (config('calcom.url'))
+            <div class="mt-6">
+                @if ($user->hasCalcomAccess())
+                    <a
+                        href="{{ route('calcom.access') }}"
+                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition bg-blue-600 border border-transparent rounded-lg shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                        Access Cal.com
+                    </a>
+                    <p class="mt-2 text-sm text-zinc-600">Launch your scheduling dashboard without another login.</p>
+                @else
+                    <a
+                        href="{{ route('settings.subscription') }}"
+                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition bg-emerald-600 border border-transparent rounded-lg shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                    >
+                        Start Free Trial
+                    </a>
+                    <p class="mt-2 text-sm text-zinc-600">Unlock calendar access by starting your free trial or subscription.</p>
+                @endif
+            </div>
+        @endif
+
         <div class="flex flex-col w-full mt-6 space-y-5 md:flex-row lg:mt-0 md:space-y-0 md:space-x-5">
             <x-app.dashboard-card
-				href="https://devdojo.com/wave/docs"
-				target="_blank"
-				title="Documentation"
+                                href="https://devdojo.com/wave/docs"
+                                target="_blank"
+                                title="Documentation"
 				description="Learn how to customize your app and make it shine!"
 				link_text="View The Docs"
 				image="/wave/img/docs.png"

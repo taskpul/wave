@@ -28,6 +28,7 @@ class User extends WaveUser
         'verification_code',
         'verified',
         'trial_ends_at',
+        'calcom_user_id',
     ];
 
     /**
@@ -66,5 +67,10 @@ class User extends WaveUser
             // Assign the default role
             $user->assignRole(config('wave.default_user_role', 'registered'));
         });
+    }
+
+    public function hasCalcomAccess(): bool
+    {
+        return $this->subscriber() || $this->onTrial();
     }
 }
