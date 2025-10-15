@@ -22,7 +22,22 @@
             this.navElementButton = navElement;
             this.navigationMegaMenuActiveElement = $refs[navElement.dataset.ref];
 
-            this.$refs.navigationDropdown.style.left = navElement.offsetLeft + 'px';
+            const dropdown = this.$refs.navigationDropdown;
+            if (!dropdown) {
+                return;
+            }
+
+            let left = navElement.offsetLeft;
+            const containerWidth = this.getContainerWidth();
+            const dropdownWidth = this.navigationMegaMenuActiveElement ? this.navigationMegaMenuActiveElement.offsetWidth : 0;
+
+            if (!this.isMobile && containerWidth && dropdownWidth) {
+                const maxLeft = Math.max(containerWidth - dropdownWidth, 0);
+                left = Math.min(left, maxLeft);
+                left = Math.max(left, 0);
+            }
+
+            dropdown.style.left = left + 'px';
 
             let that = this;
             setTimeout(function(){
@@ -41,11 +56,29 @@
                     this.$refs.navigationDropdown.style.width = '100%';
                     this.$refs.navigationDropdown.style.height = '100vh';
                 } else {
-                    console.log(this.navElementButton.offsetTop);
-                    this.$refs.navigationDropdown.style.width = newWidth + 'px';
+                    const containerWidth = this.getContainerWidth();
+                    if(containerWidth){
+                        newWidth = Math.min(newWidth, containerWidth);
+                    }
+                    this.$refs.navigationDropdown.style.width = newWidth > 0 ? newWidth + 'px' : '';
                     this.$refs.navigationDropdown.style.height = newHeight + 20 + 'px';
+                    const dropdown = this.$refs.navigationDropdown;
+                    if(dropdown && containerWidth){
+                        const dropdownWidth = dropdown.offsetWidth;
+                        let currentLeft = parseInt(dropdown.style.left || 0, 10);
+                        const maxLeft = Math.max(containerWidth - dropdownWidth, 0);
+                        currentLeft = Math.min(currentLeft, maxLeft);
+                        currentLeft = Math.max(currentLeft, 0);
+                        dropdown.style.left = currentLeft + 'px';
+                    }
                 }
             }
+        },
+        getContainerWidth(){
+            if(!this.$refs.navigationContainer){
+                return 0;
+            }
+            return this.$refs.navigationContainer.offsetWidth;
         },
         navigationMenuClearCloseTimeout(){
             console.log('clearing');
@@ -93,19 +126,19 @@
         })
     " 
     :class="{ 'border-gray-600/10 dark:border-white/10 duration-300 ease-out backdrop-blur-md ' : scrolled, 'border-transparent dark:border-transparent bg-transparent' : !scrolled }" class="sticky top-0 z-50 w-full h-16 border-b border-transparent bg-white/95 dark:bg-black/90">
-    <div class="relative flex items-center justify-between px-5 md:px-8 py-4 mx-auto @if(!Request::is('/')){{ 'max-w-7xl' }}@else{{ '2xl:container' }}@endif">
+    <div class="relative flex items-center justify-between w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-10 py-4 mx-auto">
         <div class="flex items-center">
             <a href="{{ route('home') }}" class="text-xl font-semibold text-gray-800">
                 <x-logo class="w-auto h-7" />
             </a>
-            <div 
+            <div
                 :class="{ 'block' : mobileMenuOpen, 'md:block hidden' : !mobileMenuOpen }"
                 class="z-10 hidden w-auto md:ml-3 lg:ml-5 md:block">
                 <div :class="{ 'fixed md:relative bg-white dark:bg-black md:bg-transparent md:min-h-0 min-h-screen md:w-auto w-screen left-0 ease-out border-t border-gray-200 md:border-t-0 dark:border-gray-800 overflow-scroll md:overflow-auto duration-300 top-16 md:top-0 p-3 md:p-0' : mobileMenuOpen, 'h-0 md:h-auto' : !mobileMenuOpen }">
                     <div class="block md:hidden">
                         <x-marketing.elements.header-auth-dashboard-buttons />
                     </div>
-                    <nav class="relative">
+                    <nav class="relative" x-ref="navigationContainer">
                         <ul class="flex flex-col space-x-0 md:space-y-0 space-y-0.5 md:flex-row lg:space-x-1 group dark:text-neutral-300">
                             <li><x-marketing.elements.nav-item dropdown="true" dropdown-ref="products">Products</x-marketing.elements.nav-item></li>
                             <li><x-marketing.elements.nav-item dropdown="true" dropdown-ref="solutions">Solutions</x-marketing.elements.nav-item></li>

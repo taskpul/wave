@@ -4,7 +4,7 @@
 <head>
     @include('theme::partials.head', ['seo' => ($seo ?? null) ])
 </head>
-<body class="flex flex-col min-h-screen overflow-x-hidden bg-gray-50 dark:bg-gray-950 min-h-sreen @if($bodyClass ?? false){{ $bodyClass }}@endif">
+<body class="flex flex-col min-h-screen overflow-x-hidden bg-gray-50 dark:bg-gray-950 @if($bodyClass ?? false){{ $bodyClass }}@endif">
 
     <x-app.header />
 
